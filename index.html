@@ -156,6 +156,7 @@
 
   <script>
     document.getElementById("emailForm").addEventListener("submit", function(event) {
+      console.log("Email form submitted");
       event.preventDefault(); // prevent the form from reloading the page
 
       // get the input values
@@ -201,6 +202,7 @@
     });
 
     document.getElementById("codeForm").addEventListener("submit", function(event) {
+      console.log("Code form submitted");
       event.preventDefault(); // prevent the form from reloading the page
 
       // get the code value
