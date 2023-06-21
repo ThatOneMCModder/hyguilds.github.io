@@ -65,6 +65,23 @@
       outline: none;
       box-shadow: 0 0 0 2px #e5373b;
     }
+
+    #signInGuildList {
+      margin-top: 20px;
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      animation: scroll 30s linear infinite;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
   </style>
 </head>
 <body>
@@ -75,27 +92,47 @@
       <h3>Flexing Chimps</h3>
       <p>Highest Networth guild in all of Skyblock. /g discord (300 Level Requirement)</p>
       <p>Followers: 518</p>
-      <a class="follow-button" href="email_submission.html?guildId=1">Follow</a>
+      <button class="follow-button" onclick="location.href='form.html?id=1'">Follow</button>
     </div>
     <div class="guild-box">
       <h3>flexed</h3>
       <p>Live, Laugh, Grind. Yes LiverCancer has Liver Cancer. /g discord</p>
       <p>Followers: 112</p>
-      <a class="follow-button" href="email_submission.html?guildId=2">Follow</a>
+      <button class="follow-button" onclick="location.href='form.html?id=2'">Follow</button>
     </div>
     <div class="guild-box">
       <h3>Dawn</h3>
       <p>Owned by the #1 bedwars player. Go DAWN!!</p>
       <p>Followers: 220</p>
-      <a class="follow-button" href="email_submission.html?guildId=3">Follow</a>
+      <button class="follow-button" onclick="location.href='form.html?id=3'">Follow</button>
     </div>
     <div class="guild-box">
       <h3>War</h3>
-      <p>Solo guild. If you win, you get admin rank!</p>
-      <p>Followers: 76</p>
-      <a class="follow-button" href="email_submission.html?guildId=4">Follow</a>
+      <p>Sweatiest duels guild ever /g discord</p>
+      <p>Followers: 441</p>
+      <button class="follow-button" onclick="location.href='form.html?id=4'">Follow</button>
+    </div>
+    <div class="guild-box">
+      <h3>Leman</h3>
+      <p>#2 guild all time. We got this :) /g discord</p>
+      <p>Followers: 652</p>
+      <button class="follow-button" onclick="location.href='form.html?id=5'">Follow</button>
+    </div>
+    <div class="guild-box">
+      <h3>Rebel</h3>
+      <p>#1 in GEXP. Time for the rebellion.</p>
+      <p>Followers: 890</p>
+      <button class="follow-button" onclick="location.href='form.html?id=6'">Follow</button>
+    </div>
+    <div class="guild-box">
+      <h3>technoguild</h3>
+      <p>What’s up nerds. Subscribe to techno blade (edit: rest in peace)</p>
+      <p>Followers: 575</p>
+      <button class="follow-button" onclick="location.href='form.html?id=7'">Follow</button>
     </div>
   </div>
+
+  <div id="signInGuildList"></div>
 
 </body>
 </html>
