@@ -41,7 +41,7 @@
       border-radius: 4px;
     }
 
-    #formContainer button[type="submit"] {
+    #formContainer input[type="submit"] {
       background-color: #ff5a5f;
       border: none;
       border-radius: 4px;
@@ -53,13 +53,30 @@
       margin-top: 10px;
     }
 
-    #formContainer button[type="submit"]:hover {
+    #formContainer input[type="submit"]:hover {
       background-color: #e5373b;
     }
 
-    #formContainer button[type="submit"]:focus {
+    #formContainer input[type="submit"]:focus {
       outline: none;
       box-shadow: 0 0 0 2px #e5373b;
+    }
+
+    #codeContainer {
+      display: none;
+      margin-top: 20px;
+    }
+
+    #codeContainer label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    #codeContainer input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
   </style>
 </head>
@@ -72,7 +89,16 @@
       <label for="email">Email</label>
       <input type="email" id="email" required><br>
       <input type="hidden" id="guildId" value="">
-      <button type="submit">Submit</button>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+  <div id="codeContainer">
+    <h2>Submit Code</h2>
+    <form id="codeForm">
+      <label for="code">Verification Code</label>
+      <input type="text" id="code" required><br>
+      <input type="submit" value="Submit">
     </form>
   </div>
 
@@ -80,6 +106,7 @@
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const guildId = urlParams.get('id');
+    let emailSubmitted = false;
 
     if (guildId) {
       document.getElementById('guildId').value = guildId;
@@ -126,9 +153,9 @@
       .then(function(response) {
         if (response.ok) {
           console.log("Email and IGN submitted successfully!");
-          // You can perform any further actions here, such as displaying a success message
-        }
-        else {
+          emailSubmitted = true;
+          showCodeForm();
+        } else {
           console.log("Error:", response.statusText);
         }
       })
@@ -136,6 +163,27 @@
         console.log("Error:", error);
       });
     });
+
+    document.getElementById("codeForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // prevent the form from reloading the page
+
+      // get the verification code
+      const code = document.getElementById('code').value;
+
+      // validate the code and perform further actions if needed
+      if (code === '123456') {
+        console.log("Code submitted successfully!");
+        // Code validation success, you can perform any further actions here
+      } else {
+        console.log("Invalid code!");
+        // Code validation failed, you can display an error message or take other actions
+      }
+    });
+
+    function showCodeForm() {
+      document.getElementById("formContainer").style.display = "none";
+      document.getElementById("codeContainer").style.display = "block";
+    }
   </script>
 </body>
 </html>
