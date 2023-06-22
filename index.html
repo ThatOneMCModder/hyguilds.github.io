@@ -16,12 +16,9 @@
     }
 
     .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      grid-gap: 20px;
+      display: flex;
       overflow: hidden;
-      white-space: nowrap;
-      animation: scroll 30s linear infinite;
+      animation: scroll 60s linear infinite;
     }
 
     .guild-box {
@@ -30,9 +27,8 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       padding: 20px;
       transition: transform 0.3s, box-shadow 0.3s;
-      display: inline-block;
       margin-right: 20px;
-      vertical-align: top;
+      flex-shrink: 0;
     }
 
     .guild-box:last-child {
@@ -79,8 +75,7 @@
     #signInGuildList {
       margin-top: 20px;
       display: flex;
-      overflow-x: auto;
-      white-space: nowrap;
+      overflow-x: hidden;
     }
 
     @keyframes scroll {
@@ -88,7 +83,7 @@
         transform: translateX(0%);
       }
       100% {
-        transform: translateX(calc(-100% + 250px));
+        transform: translateX(-100%);
       }
     }
   </style>
