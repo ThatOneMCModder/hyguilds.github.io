@@ -3,7 +3,81 @@
 <head>
   <title>Follow Guild</title>
   <style>
-    /* CSS styles here */
+    body {
+      background-color: #f2f2f2;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #333;
+      text-align: center;
+    }
+
+    #formContainer {
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    #formContainer h2 {
+      margin-bottom: 20px;
+    }
+
+    #formContainer label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    #formContainer input[type="text"],
+    #formContainer input[type="email"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #formContainer input[type="submit"] {
+      background-color: #ff5a5f;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      cursor: pointer;
+      padding: 8px 16px;
+      font-size: 14px;
+      transition: background-color 0.3s;
+      margin-top: 10px;
+    }
+
+    #formContainer input[type="submit"]:hover {
+      background-color: #e5373b;
+    }
+
+    #formContainer input[type="submit"]:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #e5373b;
+    }
+
+    #codeContainer {
+      display: none;
+      margin-top: 20px;
+    }
+
+    #codeContainer label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    #codeContainer input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
   </style>
 </head>
 <body>
