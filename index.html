@@ -21,12 +21,21 @@
       text-align: center;
     }
 
-    .container {
-      display: flex;
-      overflow-x: auto;
+    .signInGuildList {
+      display: flex
       white-space: nowrap;
       animation: scroll 30s linear infinite;
     }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
 
     .guild-box {
       background-color: #fff;
@@ -75,15 +84,6 @@
     .follow-button:focus {
       outline: none;
       box-shadow: 0 0 0 2px #e5373b;
-    }
-
-    @keyframes scroll {
-      0% {
-        transform: translateX(0%);
-      }
-      100% {
-        transform: translateX(calc(-100% - 20px));
-      }
     }
 
     .dark-mode-toggle {
@@ -182,7 +182,7 @@
       <button class="follow-button" onclick="location.href='form.html?id=7'">Follow</button>
     </div>
   </div>
-
+  <div id="signInGuildList"></div>
   <div class="dark-mode-toggle">
     <span class="dark-mode-toggle-label">Dark Mode</span>
     <label class="switch">
