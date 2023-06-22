@@ -3,81 +3,93 @@
 <head>
   <title>Follow Guild</title>
   <style>
-  body {
+    body {
       font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
     }
 
-    #formContainer {
-      width: 300px;
+    #container {
+      max-width: 400px;
       margin: 0 auto;
       padding: 20px;
-      background-color: #f2f2f2;
+      background-color: #fff;
       border: 1px solid #ccc;
       border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
-    #formContainer h2 {
+    h2 {
       text-align: center;
+      color: #333;
+      margin-top: 0;
     }
 
-    #formContainer label {
+    label {
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
+      color: #555;
     }
 
-    #formContainer input[type="text"],
-    #formContainer input[type="email"],
-    #formContainer input[type="submit"] {
+    input[type="text"],
+    input[type="email"],
+    input[type="submit"] {
       width: 100%;
-      padding: 8px;
-      margin-bottom: 10px;
+      padding: 10px;
+      margin-bottom: 15px;
       border: 1px solid #ccc;
       border-radius: 4px;
+      font-size: 14px;
     }
 
-    #formContainer input[type="submit"] {
+    input[type="submit"] {
       background-color: #4CAF50;
       color: #fff;
       cursor: pointer;
+      transition: background-color 0.3s;
     }
 
-    #formContainer input[type="submit"]:hover {
+    input[type="submit"]:hover {
       background-color: #45a049;
     }
 
     #codeContainer {
       display: none;
-      width: 300px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #f2f2f2;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+    }
+
+    #verificationCode {
+      font-weight: bold;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <div id="formContainer">
+  <div id="container">
     <h2>Follow Guild</h2>
-    <form id="followForm">
-      <label for="username">Minecraft Username</label>
-      <input type="text" id="username" required>
+    <div id="formContainer">
+      <form id="followForm">
+        <label for="username">Minecraft Username:</label>
+        <input type="text" id="username" required>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
 
-      <input type="submit" value="Submit">
-    </form>
-  </div>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
 
-  <div id="codeContainer">
-    <h2>Verification Code</h2>
-    <form id="codeForm">
-      <label for="code">Code</label>
-      <input type="text" id="code" required>
+    <div id="codeContainer">
+      <h2>Verification Code</h2>
+      <p>Please enter the verification code we sent to your email address.</p>
+      <form id="codeForm">
+        <label for="code">Code:</label>
+        <input type="text" id="code" required>
 
-      <input type="submit" value="Verify">
-    </form>
+        <input type="submit" value="Verify">
+      </form>
+      <p id="verificationCode"></p>
+    </div>
   </div>
 
   <script>
