@@ -19,6 +19,9 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       grid-gap: 20px;
+      overflow: hidden;
+      white-space: nowrap;
+      animation: scroll 30s linear infinite;
     }
 
     .guild-box {
@@ -27,6 +30,13 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       padding: 20px;
       transition: transform 0.3s, box-shadow 0.3s;
+      display: inline-block;
+      margin-right: 20px;
+      vertical-align: top;
+    }
+
+    .guild-box:last-child {
+      margin-right: 0;
     }
 
     .guild-box:hover {
@@ -71,7 +81,6 @@
       display: flex;
       overflow-x: auto;
       white-space: nowrap;
-      animation: scroll 30s linear infinite;
     }
 
     @keyframes scroll {
@@ -79,7 +88,7 @@
         transform: translateX(0%);
       }
       100% {
-        transform: translateX(-100%);
+        transform: translateX(calc(-100% + 250px));
       }
     }
   </style>
@@ -130,6 +139,20 @@
       <p>Followers: 575</p>
       <button class="follow-button" onclick="location.href='form.html?id=7'">Follow</button>
     </div>
+    <div class="guild-box">
+      <h3>Example Guild 1</h3>
+      <p>This is an example guild.</p>
+      <p>Followers: 123</p>
+      <button class="follow-button" onclick="location.href='form.html?id=8'">Follow</button>
+    </div>
+    <div class="guild-box">
+      <h3>Example Guild 2</h3>
+      <p>This is another example guild.</p>
+      <p>Followers: 456</p>
+      <button class="follow-button" onclick="location.href='form.html?id=9'">Follow</button>
+    </div>
+    <!-- Add more guilds here -->
+
   </div>
 
   <div id="signInGuildList"></div>
