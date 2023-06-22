@@ -91,6 +91,13 @@
       <p id="verificationCode"></p>
     </div>
   </div>
+    <div class="dark-mode-toggle">
+    <span class="dark-mode-toggle-label">Dark Mode</span>
+    <label class="switch">
+      <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
+      <span class="slider"></span>
+    </label>
+  </div>
 
 <script>
   let emailSubmitted = false;
@@ -196,6 +203,29 @@
     document.getElementById("formContainer").style.display = "none";
     document.getElementById("codeContainer").style.display = "block";
   }
+   // Function to toggle dark mode
+    function toggleDarkMode() {
+      const body = document.body;
+      body.classList.toggle('dark-mode');
+
+      // Store the dark mode preference in localStorage
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      const isDarkMode = darkModeToggle.checked;
+      localStorage.setItem('darkMode', isDarkMode);
+    }
+
+    // Function to check the dark mode preference and apply it on page load
+    function applyDarkModePreference() {
+      const darkModePreference = localStorage.getItem('darkMode');
+
+      if (darkModePreference === 'true') {
+        document.body.classList.add('dark-mode');
+        document.getElementById('darkModeToggle').checked = true;
+      }
+    }
+
+    // Apply the dark mode preference on page load
+    applyDarkModePreference();
 </script>
 </body>
 </html>
