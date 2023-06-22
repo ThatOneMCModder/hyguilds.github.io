@@ -8,6 +8,12 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 20px;
+      transition: background-color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: #222;
+      color: #fff;
     }
 
     h1 {
@@ -120,11 +126,11 @@
       transition: transform 0.3s;
     }
 
-    .dark-mode-toggle input:checked + .slider {
-      background-color: #2196F3;
+    input[type="checkbox"]:checked + .slider {
+      background-color: #66bb6a;
     }
 
-    .dark-mode-toggle input:checked + .slider:before {
+    input[type="checkbox"]:checked + .slider:before {
       transform: translateX(20px);
     }
   </style>
