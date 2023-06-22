@@ -8,12 +8,6 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 20px;
-      transition: background-color 0.3s;
-    }
-
-    .dark-mode body {
-      background-color: #333;
-      color: #fff;
     }
 
     h1 {
@@ -22,9 +16,10 @@
     }
 
     .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      grid-gap: 20px;
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      animation: scroll 30s linear infinite;
     }
 
     .guild-box {
@@ -32,7 +27,11 @@
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       padding: 20px;
+      margin-right: 20px;
       transition: transform 0.3s, box-shadow 0.3s;
+      flex: 0 0 auto;
+      min-width: 250px;
+      max-width: 100%;
     }
 
     .guild-box:hover {
@@ -72,33 +71,26 @@
       box-shadow: 0 0 0 2px #e5373b;
     }
 
-    #signInGuildList {
-      margin-top: 20px;
-      display: flex;
-      overflow-x: auto;
-      white-space: nowrap;
-      animation: scroll 30s linear infinite;
-    }
-
-    /* Keyframes for scrolling */
     @keyframes scroll {
       0% {
         transform: translateX(0%);
       }
       100% {
-        transform: translateX(calc(-100% + 250px));
+        transform: translateX(calc(-100% - 20px));
       }
     }
 
-    /* Dark Mode toggle styles */
     .dark-mode-toggle {
       position: fixed;
       top: 20px;
       right: 20px;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      font-size: 14px;
     }
 
     .dark-mode-toggle-label {
-      color: #333;
       margin-right: 8px;
     }
 
@@ -106,23 +98,23 @@
       display: none;
     }
 
-    .dark-mode-toggle .slider {
+    .slider {
       position: relative;
       display: inline-block;
       width: 40px;
       height: 20px;
-      border-radius: 20px;
       background-color: #ccc;
+      border-radius: 20px;
       transition: background-color 0.3s;
     }
 
-    .dark-mode-toggle .slider:before {
+    .slider:before {
       content: "";
       position: absolute;
       width: 16px;
       height: 16px;
-      border-radius: 50%;
       background-color: #fff;
+      border-radius: 50%;
       top: 2px;
       left: 2px;
       transition: transform 0.3s;
@@ -185,20 +177,19 @@
     </div>
   </div>
 
-  <div id="signInGuildList"></div>
-
   <div class="dark-mode-toggle">
-    <label class="dark-mode-toggle-label">Dark Mode</label>
-    <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()">
-    <span class="slider"></span>
+    <span class="dark-mode-toggle-label">Dark Mode</span>
+    <label class="switch">
+      <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
+      <span class="slider"></span>
+    </label>
   </div>
 
   <script>
     function toggleDarkMode() {
       const body = document.body;
-      body.classList.toggle("dark-mode");
+      body.classList.toggle('dark-mode');
     }
   </script>
-
 </body>
 </html>
