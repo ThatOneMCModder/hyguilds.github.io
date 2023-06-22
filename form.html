@@ -93,14 +93,7 @@
   </div>
 
   <script>
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const guildId = urlParams.get('id');
     let emailSubmitted = false;
-
-    if (guildId) {
-      document.getElementById('guildId').value = guildId;
-    }
 
     document.getElementById("followForm").addEventListener("submit", function(event) {
       event.preventDefault(); // prevent the form from reloading the page
@@ -108,7 +101,6 @@
       // get the input values
       const username = document.getElementById('username').value;
       const email = document.getElementById('email').value;
-      const guildId = document.getElementById('guildId').value;
 
       // create the webhook message
       const message = {
