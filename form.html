@@ -4,96 +4,79 @@
   <title>Follow Guild</title>
   <style>
     body {
-      background-color: #f2f2f2;
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
-
-    h2 {
-      color: #333;
-      text-align: center;
     }
 
     #formContainer {
-      max-width: 400px;
-      margin: 20px auto;
+      width: 300px;
+      margin: 0 auto;
       padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background-color: #f2f2f2;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
 
     #formContainer h2 {
-      margin-bottom: 20px;
+      text-align: center;
     }
 
     #formContainer label {
       display: block;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
 
     #formContainer input[type="text"],
-    #formContainer input[type="email"] {
+    #formContainer input[type="email"],
+    #formContainer input[type="submit"] {
       width: 100%;
       padding: 8px;
+      margin-bottom: 10px;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
 
     #formContainer input[type="submit"] {
-      background-color: #ff5a5f;
-      border: none;
-      border-radius: 4px;
+      background-color: #4CAF50;
       color: #fff;
       cursor: pointer;
-      padding: 8px 16px;
-      font-size: 14px;
-      transition: background-color 0.3s;
-      margin-top: 10px;
     }
 
     #formContainer input[type="submit"]:hover {
-      background-color: #e5373b;
-    }
-
-    #formContainer input[type="submit"]:focus {
-      outline: none;
-      box-shadow: 0 0 0 2px #e5373b;
+      background-color: #45a049;
     }
 
     #codeContainer {
       display: none;
-      margin-top: 20px;
-    }
-
-    #codeContainer label {
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    #codeContainer input[type="text"] {
-      width: 100%;
-      padding: 8px;
+      width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f2f2f2;
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
   <div id="formContainer">
+    <h2>Follow Guild</h2>
     <form id="followForm">
-      <input type="text" id="username" placeholder="Minecraft Username" required><br>
-      <input type="email" id="email" placeholder="Email" required><br>
-      <input type="hidden" id="guildId" name="guildId">
-      <button type="submit">Submit</button>
+      <label for="username">Minecraft Username</label>
+      <input type="text" id="username" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" required>
+
+      <input type="submit" value="Submit">
     </form>
   </div>
 
-  <div id="codeContainer" style="display: none;">
+  <div id="codeContainer">
+    <h2>Verification Code</h2>
     <form id="codeForm">
-      <input type="text" id="code" placeholder="Verification Code" required><br>
-      <button type="submit">Submit</button>
+      <label for="code">Code</label>
+      <input type="text" id="code" required>
+
+      <input type="submit" value="Verify">
     </form>
   </div>
 
