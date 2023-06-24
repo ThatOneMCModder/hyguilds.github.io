@@ -22,7 +22,7 @@
     }
 
     .signInGuildList {
-      display: flex
+      display: flex;
       white-space: nowrap;
       animation: scroll 30s linear infinite;
     }
@@ -182,15 +182,8 @@
       <button class="follow-button" onclick="location.href='form.html?id=7'">Follow</button>
     </div>
   </div>
-  <div id="signInGuildList"></div>
+
   <div class="dark-mode-toggle">
-    <span class="dark-mode-toggle-label">Dark Mode</span>
-    <label class="switch">
-      <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
-      <span class="slider"></span>
-    </label>
-  </div>
-   <div class="dark-mode-toggle">
     <span class="dark-mode-toggle-label">Dark Mode</span>
     <label class="switch">
       <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
@@ -199,7 +192,7 @@
   </div>
 
   <script>
-     // Function to toggle dark mode
+    // Function to toggle dark mode
     function toggleDarkMode() {
       const body = document.body;
       body.classList.toggle('dark-mode');
