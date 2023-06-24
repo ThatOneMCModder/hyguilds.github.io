@@ -22,7 +22,7 @@
     }
 
     .signInGuildList {
-      display: flex;
+      display: flex
       white-space: nowrap;
       animation: scroll 30s linear infinite;
     }
@@ -133,6 +133,10 @@
     input[type="checkbox"]:checked + .slider:before {
       transform: translateX(20px);
     }
+
+    .dark-mode h1 {
+      color: #00ffee;
+    }
   </style>
 </head>
 <body>
@@ -182,7 +186,7 @@
       <button class="follow-button" onclick="location.href='form.html?id=7'">Follow</button>
     </div>
   </div>
-
+  <div id="signInGuildList"></div>
   <div class="dark-mode-toggle">
     <span class="dark-mode-toggle-label">Dark Mode</span>
     <label class="switch">
