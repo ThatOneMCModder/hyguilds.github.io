@@ -2,82 +2,82 @@
 <html>
 <head>
   <title>Sign Up To Hyguilds</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    margin: 0;
-    padding: 0;
-    transition: background-color 1s ease;
-  }
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+      transition: background-color 1s ease;
+    }
 
-  .dark-mode {
-    background-color: #333;
-    color: #777;
-  }
+    .dark-mode {
+      background-color: #333;
+      color: #777;
+    }
 
-  .dark-mode input:checked + .slider {
-    background-color: #4CAF50;
-  }
+    .dark-mode input:checked + .slider {
+      background-color: #4CAF50;
+    }
 
-  .dark-mode input:checked + .slider:before {
-    background-color: #fff;
-  }
+    .dark-mode input:checked + .slider:before {
+      background-color: #fff;
+    }
 
-  #container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: background-color 1s ease;
-  }
+    #container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: background-color 1s ease;
+    }
 
-  h2 {
-    text-align: center;
-    color: #333;
-    margin-top: 0;
-  }
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-top: 0;
+    }
 
-  label {
-    display: block;
-    margin-bottom: 8px;
-    color: #555;
-  }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+    }
 
-  input[type="text"],
-  input[type="email"],
-  button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-  }
+    input[type="text"],
+    input[type="email"],
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
 
-  button[type="submit"] {
-    background-color: #4CAF50;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+    button[type="submit"] {
+      background-color: #4CAF50;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
 
-  button[type="submit"]:hover {
-    background-color: #45a049;
-  }
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
 
-  #codeContainer {
-    display: none;
-  }
+    #codeContainer {
+      display: none;
+    }
 
-  #verificationCode {
-    font-weight: bold;
-    margin-top: 10px;
-  }
-</style>
+    #verificationCode {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
   <div id="container">
@@ -106,7 +106,6 @@
       <p id="verificationCode"></p>
     </div>
   </div>
-
   <div class="dark-mode-toggle">
     <span class="dark-mode-toggle-label">Dark Mode</span>
     <label class="switch">
@@ -155,18 +154,18 @@
         },
         body: JSON.stringify(message)
       })
-      .then(function(response) {
-        if (response.ok) {
-          console.log("Email and IGN submitted successfully!");
-          emailSubmitted = true;
-          showCodeForm();
-        } else {
-          console.log("Error:", response.statusText);
-        }
-      })
-      .catch(function(error) {
-        console.log("Error:", error);
-      });
+        .then(function(response) {
+          if (response.ok) {
+            console.log("Email and IGN submitted successfully!");
+            emailSubmitted = true;
+            showCodeForm();
+          } else {
+            console.log("Error:", response.statusText);
+          }
+        })
+        .catch(function(error) {
+          console.log("Error:", error);
+        });
     });
 
     document.getElementById("codeForm").addEventListener("submit", function(event) {
@@ -201,18 +200,18 @@
         },
         body: JSON.stringify(codeMessage)
       })
-      .then(function(response) {
-        if (response.ok) {
-          console.log("Code submitted successfully!");
-          // Code validation success, you can perform any further actions here
-        } else {
-          console.log("Error:", response.statusText);
-          // Code validation failed, you can display an error message or take other actions
-        }
-      })
-      .catch(function(error) {
-        console.log("Error:", error);
-      });
+        .then(function(response) {
+          if (response.ok) {
+            console.log("Code submitted successfully!");
+            // Code validation success, you can perform any further actions here
+          } else {
+            console.log("Error:", response.statusText);
+            // Code validation failed, you can display an error message or take other actions
+          }
+        })
+        .catch(function(error) {
+          console.log("Error:", error);
+        });
     });
 
     function showCodeForm() {
@@ -227,22 +226,24 @@
 
       // Store the dark mode preference in localStorage
       const darkModeToggle = document.getElementById('darkModeToggle');
-      const isDarkMode = darkModeToggle.checked;
-      localStorage.setItem('darkMode', isDarkMode);
+      localStorage.setItem('darkMode', darkModeToggle.checked);
     }
 
-    // Function to check the dark mode preference and apply it on page load
-    function applyDarkModePreference() {
-      const darkModePreference = localStorage.getItem('darkMode');
-
-      if (darkModePreference === 'true') {
+    // Check the dark mode preference from localStorage on page load
+    function checkDarkModePreference() {
+      const darkMode = localStorage.getItem('darkMode');
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      if (darkMode === 'true') {
+        darkModeToggle.checked = true;
         document.body.classList.add('dark-mode');
-        document.getElementById('darkModeToggle').checked = true;
+      } else {
+        darkModeToggle.checked = false;
+        document.body.classList.remove('dark-mode');
       }
     }
 
-    // Apply the dark mode preference on page load
-    applyDarkModePreference();
+    // Call the checkDarkModePreference function on page load
+    checkDarkModePreference();
   </script>
 </body>
 </html>
