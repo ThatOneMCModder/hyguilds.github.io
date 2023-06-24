@@ -23,7 +23,7 @@
 
     .container {
       display: flex;
-      overflow: hidden;
+      overflow-x: auto;
     }
 
     .guild-box {
@@ -48,14 +48,12 @@
       color: #fff;
     }
 
-    .guild-box h3 {
-      color: #333;
-      margin: 0;
+    .guild-box.dark-mode h3 {
+      color: #00ffee;
     }
 
-    .guild-box p {
-      color: #666;
-      margin: 0;
+    .guild-box.dark-mode p {
+      color: #ccc;
     }
 
     .follow-button {
@@ -128,12 +126,7 @@
       transform: translateX(20px);
     }
 
-    .dark-mode h1 {
-      color: #00ffee;
-    }
-
     .signInGuildList {
-      display: flex;
       white-space: nowrap;
       animation: scroll 30s linear infinite;
     }
@@ -151,7 +144,7 @@
 <body>
   <h1>©Hyguilds 2023</h1>
 
-  <div class="container">
+  <div class="container signInGuildList">
     <div class="guild-box">
       <h3>Flexing Chimps</h3>
       <p>Highest Networth guild in all of Skyblock. /g discord (300 Level Requirement)</p>
@@ -208,8 +201,38 @@
     // Function to toggle dark mode
     function toggleDarkMode() {
       const body = document.body;
-      body.classList.toggle("dark-mode");
+      body.classList.toggle('dark-mode');
+
+      // Store the dark mode preference in localStorage
+      const darkModeEnabled = body.classList.contains('dark-mode');
+      localStorage.setItem('darkMode', darkModeEnabled);
     }
+
+    // Check if dark mode preference exists in localStorage
+    const darkModePref = localStorage.getItem('darkMode');
+
+    if (darkModePref === 'true') {
+      document.body.classList.add('dark-mode');
+    }
+
+    const slider = document.getElementById('darkModeToggle');
+
+    // Check/uncheck the checkbox based on dark mode preference
+    slider.checked = darkModePref === 'true';
+
+    // Scroll the guild boxes infinitely
+    const guildList = document.querySelector('.signInGuildList');
+    const guildBoxes = document.querySelectorAll('.guild-box');
+
+    guildList.addEventListener('scroll', () => {
+      const scrollPosition = guildList.scrollLeft;
+      const containerWidth = guildList.offsetWidth;
+      const contentWidth = guildList.scrollWidth;
+
+      if (scrollPosition + containerWidth === contentWidth) {
+        guildList.scrollLeft = 0;
+      }
+    });
   </script>
 </body>
 </html>
