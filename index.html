@@ -21,21 +21,10 @@
       text-align: center;
     }
 
-    .signInGuildList {
-      display: flex
-      white-space: nowrap;
-      animation: scroll 30s linear infinite;
+    .container {
+      display: flex;
+      overflow: hidden;
     }
-
-    @keyframes scroll {
-      0% {
-        transform: translateX(0%);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
-    }
-
 
     .guild-box {
       background-color: #fff;
@@ -52,6 +41,11 @@
     .guild-box:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .guild-box.dark-mode {
+      background-color: #333;
+      color: #fff;
     }
 
     .guild-box h3 {
@@ -137,6 +131,21 @@
     .dark-mode h1 {
       color: #00ffee;
     }
+
+    .signInGuildList {
+      display: flex;
+      white-space: nowrap;
+      animation: scroll 30s linear infinite;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
   </style>
 </head>
 <body>
@@ -186,7 +195,7 @@
       <button class="follow-button" onclick="location.href='form.html?id=7'">Follow</button>
     </div>
   </div>
-  <div id="signInGuildList"></div>
+
   <div class="dark-mode-toggle">
     <span class="dark-mode-toggle-label">Dark Mode</span>
     <label class="switch">
@@ -199,26 +208,8 @@
     // Function to toggle dark mode
     function toggleDarkMode() {
       const body = document.body;
-      body.classList.toggle('dark-mode');
-
-      // Store the dark mode preference in localStorage
-      const darkModeToggle = document.getElementById('darkModeToggle');
-      const isDarkMode = darkModeToggle.checked;
-      localStorage.setItem('darkMode', isDarkMode);
+      body.classList.toggle("dark-mode");
     }
-
-    // Function to check the dark mode preference and apply it on page load
-    function applyDarkModePreference() {
-      const darkModePreference = localStorage.getItem('darkMode');
-
-      if (darkModePreference === 'true') {
-        document.body.classList.add('dark-mode');
-        document.getElementById('darkModeToggle').checked = true;
-      }
-    }
-
-    // Apply the dark mode preference on page load
-    applyDarkModePreference();
   </script>
 </body>
 </html>
