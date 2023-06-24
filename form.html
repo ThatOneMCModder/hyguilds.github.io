@@ -104,6 +104,15 @@
       color: #ccc;
     }
 
+    .dark-mode .dark-mode-toggle-container {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
     .dark-mode .slider {
       background-color: #ccc;
     }
@@ -141,7 +150,7 @@
     </div>
   </div>
 
-  <div class="dark-mode-toggle">
+  <div class="dark-mode-toggle-container">
     <label class="switch">
       <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
       <span class="slider"></span>
