@@ -11,6 +11,10 @@
       transition: background-color 1s;
     }
 
+    .dark-mode body {
+      background-color: #222;
+    }
+
     #container {
       max-width: 400px;
       margin: 0 auto;
@@ -19,21 +23,23 @@
       border: 1px solid #ccc;
       border-radius: 5px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      transition: background-color 1s, border-color 1s;
+      transition: background-color 1s;
+    }
+
+    .dark-mode #container {
+      background-color: #333;
     }
 
     h2 {
       text-align: center;
       color: #333;
       margin-top: 0;
-      transition: color 1s;
     }
 
     label {
       display: block;
       margin-bottom: 8px;
       color: #555;
-      transition: color 1s;
     }
 
     input[type="text"],
@@ -45,14 +51,13 @@
       border: 1px solid #ccc;
       border-radius: 4px;
       font-size: 14px;
-      transition: border-color 1s;
     }
 
     button[type="submit"] {
       background-color: #4CAF50;
       color: #fff;
       cursor: pointer;
-      transition: background-color 1s;
+      transition: background-color 0.3s;
     }
 
     button[type="submit"]:hover {
@@ -68,25 +73,31 @@
       margin-top: 10px;
     }
 
+    /* Dark Mode Toggle */
     .dark-mode-toggle {
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: 10px;
+      right: 10px;
       display: flex;
       align-items: center;
-      color: #555;
-      transition: color 1s;
+      color: #fff;
     }
 
     .dark-mode-toggle-label {
-      margin-right: 8px;
+      margin-right: 5px;
     }
 
     .switch {
       position: relative;
       display: inline-block;
       width: 40px;
-      height: 20px;
+      height: 24px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
     }
 
     .slider {
@@ -97,8 +108,8 @@
       right: 0;
       bottom: 0;
       background-color: #ccc;
-      transition: 1s;
-      border-radius: 20px;
+      transition: 0.3s;
+      border-radius: 24px;
     }
 
     .slider:before {
@@ -106,66 +117,40 @@
       content: "";
       height: 16px;
       width: 16px;
-      left: 2px;
-      bottom: 2px;
+      left: 4px;
+      bottom: 4px;
       background-color: white;
-      transition: 1s;
+      transition: 0.3s;
       border-radius: 50%;
     }
 
     input:checked + .slider {
-      background-color: #408040;
+      background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
     }
 
     input:checked + .slider:before {
-      transform: translateX(20px);
+      transform: translateX(16px);
     }
 
-    .dark-mode #container {
-      background-color: #222;
-      border-color: #555;
-    }
-
-    .dark-mode h2,
-    .dark-mode label,
-    .dark-mode .dark-mode-toggle-label {
-      color: #ddd;
-      transition: color 1s;
-    }
-
+    /* Dark Mode Styling */
     .dark-mode .dark-mode-toggle {
-      color: #ddd;
-      transition: color 1s;
-    }
-
-    .dark-mode input[type="text"],
-    .dark-mode input[type="email"],
-    .dark-mode button[type="submit"] {
-      border-color: #ddd;
-      transition: border-color 1s;
-    }
-
-    .dark-mode button[type="submit"] {
-      background-color: #1f9d55;
-      transition: background-color 1s;
-    }
-
-    .dark-mode #codeContainer {
-      color: #ddd;
-      transition: color 1s;
+      color: #000;
     }
 
     .dark-mode .slider {
-      background-color: #888;
-      transition: 1s;
+      background-color: #777;
     }
 
     .dark-mode input:checked + .slider {
-      background-color: #3f763f;
+      background-color: #4CAF50;
     }
 
     .dark-mode input:checked + .slider:before {
-      transform: translateX(20px);
+      background-color: #fff;
     }
   </style>
 </head>
@@ -196,6 +181,7 @@
       <p id="verificationCode"></p>
     </div>
   </div>
+
   <div class="dark-mode-toggle">
     <span class="dark-mode-toggle-label">Dark Mode</span>
     <label class="switch">
